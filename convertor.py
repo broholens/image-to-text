@@ -1,7 +1,7 @@
 import re
 import os
 import time
-from tkinter import Tk, PhotoImage, Label, Button
+from datetime import datetime
 import pyperclip  # support plain text only 
 from aip import AipOcr  # pip install baidu-aip
 from fuzzywuzzy import process  # string matching
@@ -31,13 +31,20 @@ class Convertor:
 
     def save_clipboard_img(self):
         # save image grabbed from clipboard to templete file.
-        image = ImageGrab.grabclipboard()
+        while 1:
+            try:
+                image = ImageGrab.grabclipboard()
+                break
+            except:
+                # pyperclip.copy('')
+                time.sleep(1)
         if image == self.image:
             return False
+        self.image = image
         if isinstance(image, DibImageFile):
-            if os.path.exists(self.filename):
-                os.remove(self.filename)
-            self.filename = str(time.time()*1000) + '.png'
+            # if os.path.exists(self.filename):
+            #     os.remove(self.filename)
+            # self.filename = str(time.time()*1000) + '.png'
             image.save(self.filename)
             return True
         return False
@@ -53,12 +60,14 @@ class Convertor:
         words = result['words_result'][0]['words']
         if '@' in words:
             return self.extract_mail(words)
-        return self.extract_phone(words)
+        elif words.isdigit() or all([i.isdigit() for i in words.split('-')]) is True:
+            return self.extract_phone(words)
 
 
     def extract_mail(self, words):
         # split string by @
-        word, suffix = words.split('@')
+        symbol = '@' if '@' in words else '('
+        word, suffix = words.split(symbol)
         if ':' in word:
             word = word.split(':')[-1]
         words = word + '@' + process.extractOne(suffix, self.choices)[0]
@@ -69,32 +78,15 @@ class Convertor:
     def extract_phone(self, words):
         # match phone number
         phone = self.phone_ptn.findall(words)
-        print(phone)
         if phone:
             # set to clipboard
             pyperclip.copy(phone[0])
             return phone[0]
-        return 'Phone number not found!'
 
 
-# class ConvertorGUI(Tk):
-#     def __init__(self, *args, **kwargs):
-#         super(ConvertorGUI, self).__init__()
-# def config_label():
-#     pass
-
-root = Tk()
-convertor = Convertor()
-label = Label()
-label.pack()
-result = convertor.extract()
-print(result)
-# while 1:
-#     result = convertor.extract()
-#     if not result:
-#         time.sleep(1)
-#         continue
-#     label.config(text=result, image=PhotoImage(convertor.filename), compound='top')
-
-root.mainloop()
-
+if __name__ == '__main__':
+    c = Convertor()
+    while 1:
+        result = c.extract()
+        if result:
+            print(datetime.now(), '----', result)
