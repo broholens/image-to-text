@@ -13,13 +13,13 @@ class Convertor:
     APP_ID = '11565085'
     API_KEY = 'dh9pPBqw1H4hQQyPrk4HHVv6'
     SECRET_KEY = '6mjlcxPsT2NRs7wETIqs3xYBjz0pdyH5'
+    # email suffix
     choices = ['qq.com', '126.com', '163.com', 'gmail.com', 'outlook.com', 'hotmail.com', 'sina.com']
+    # phone pattern
     phone_ptn = re.compile('\d{11}')
 
     def __init__(self):
         self.client = AipOcr(self.APP_ID, self.API_KEY, self.SECRET_KEY)
-        # phone pattern
-        self.previous_filename = 'tmp.png'
         self.filename = 'tmp.png'
         self.image = None
 
@@ -36,9 +36,11 @@ class Convertor:
             except:
                 # wait for screenshoot
                 time.sleep(1)
+        # 粘贴板内容跟上次的内容是否相同
         if image == self.image:
             return False
         self.image = image
+        # 判断是否为截图类型
         if isinstance(image, DibImageFile):
             image.save(self.filename)
             return True
@@ -53,32 +55,45 @@ class Convertor:
         # recongize image
         result = self.client.basicGeneral(image)
         words = result['words_result'][0]['words']
+        # @ 可能解析为 (
         words = words.replace('(', '@')
+        # 联系电话: **********
         if ':' in words:
             words = words.split(':')[-1]
+        # 通过@来判断使用哪个方法
         if '@' in words:
             return self.extract_mail(words)
-
-        words = words.split('已验证')[0]
-        if words.isdigit() or all([i.isdigit() for i in words.split('-')]) is True:
-            return self.extract_phone(words)
+        return self.extract_phone(words)
 
 
     def extract_mail(self, words):
         # split string by @
         word, suffix = words.split('@')
+        # 选择最匹配的邮箱
+        # TODO: qq错误匹配为gmail
         words = word.strip() + '@' + process.extractOne(suffix, self.choices)[0]
         # set clipboard
         pyperclip.copy(words)
         return words
 
     def extract_phone(self, words):
-        # match phone number
-        phone = self.phone_ptn.findall(words)
-        if phone:
-            # set to clipboard
-            pyperclip.copy(phone[0])
-            return phone[0]
+        words = words.split('已验证')[0]
+        # 转接
+        if '转' in words:
+            a, b = words.split('转')
+            words = '-'.join([a, b])
+        # 手机号
+        elif words.isdigit() is True:
+            words = self.phone_ptn.findall(words)
+            if not words:
+                return 
+            words = words[0]
+        # 未知 错误处理
+        else:
+            return
+        # 复制到粘贴板
+        pyperclip.copy(words)
+        return words
 
 
 if __name__ == '__main__':
