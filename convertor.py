@@ -1,5 +1,4 @@
 import re
-import os
 import time
 from datetime import datetime
 import pyperclip  # support plain text only 
@@ -7,7 +6,6 @@ from aip import AipOcr  # pip install baidu-aip
 from fuzzywuzzy import process  # string matching
 from PIL import ImageGrab  # grab image from clipboard
 from PIL.BmpImagePlugin import DibImageFile
-
 
 
 class Convertor:
@@ -36,7 +34,7 @@ class Convertor:
                 image = ImageGrab.grabclipboard()
                 break
             except:
-                # pyperclip.copy('')
+                # wait for screenshoot
                 time.sleep(1)
         if image == self.image:
             return False
@@ -58,6 +56,7 @@ class Convertor:
         # recongize image
         result = self.client.basicGeneral(image)
         words = result['words_result'][0]['words']
+        words = words.replace('(', '@')
         if '@' in words:
             return self.extract_mail(words)
         elif words.isdigit() or all([i.isdigit() for i in words.split('-')]) is True:
@@ -66,11 +65,11 @@ class Convertor:
 
     def extract_mail(self, words):
         # split string by @
-        symbol = '@' if '@' in words else '('
-        word, suffix = words.split(symbol)
+        # symbol = '@' if '@' in words else '('
+        word, suffix = words.split('@')
         if ':' in word:
             word = word.split(':')[-1]
-        words = word + '@' + process.extractOne(suffix, self.choices)[0]
+        words = word.strip() + '@' + process.extractOne(suffix, self.choices)[0]
         # set clipboard
         pyperclip.copy(words)
         return words
