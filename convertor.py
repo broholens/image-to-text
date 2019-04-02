@@ -13,7 +13,7 @@ class Convertor:
     APP_ID = '11565085'
     API_KEY = 'dh9pPBqw1H4hQQyPrk4HHVv6'
     SECRET_KEY = '6mjlcxPsT2NRs7wETIqs3xYBjz0pdyH5'
-    choices = ['qq.com', '126.com', '163.com', 'gmail.com', 'outlook.com', 'hotmail.com']
+    choices = ['qq.com', '126.com', '163.com', 'gmail.com', 'outlook.com', 'hotmail.com', 'sina.com']
     phone_ptn = re.compile('\d{11}')
 
     def __init__(self):
@@ -21,7 +21,7 @@ class Convertor:
         # phone pattern
         self.previous_filename = 'tmp.png'
         self.filename = 'tmp.png'
-        self.image = ''
+        self.image = None
 
     def load_image(self):
         with open(self.filename, 'rb')as f:
@@ -40,9 +40,6 @@ class Convertor:
             return False
         self.image = image
         if isinstance(image, DibImageFile):
-            # if os.path.exists(self.filename):
-            #     os.remove(self.filename)
-            # self.filename = str(time.time()*1000) + '.png'
             image.save(self.filename)
             return True
         return False
@@ -57,18 +54,19 @@ class Convertor:
         result = self.client.basicGeneral(image)
         words = result['words_result'][0]['words']
         words = words.replace('(', '@')
+        if ':' in words:
+            words = words.split(':')[-1]
         if '@' in words:
             return self.extract_mail(words)
-        elif words.isdigit() or all([i.isdigit() for i in words.split('-')]) is True:
+
+        words = words.split('已验证')[0]
+        if words.isdigit() or all([i.isdigit() for i in words.split('-')]) is True:
             return self.extract_phone(words)
 
 
     def extract_mail(self, words):
         # split string by @
-        # symbol = '@' if '@' in words else '('
         word, suffix = words.split('@')
-        if ':' in word:
-            word = word.split(':')[-1]
         words = word.strip() + '@' + process.extractOne(suffix, self.choices)[0]
         # set clipboard
         pyperclip.copy(words)
