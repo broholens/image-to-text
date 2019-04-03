@@ -19,15 +19,15 @@ Run gui.exe.
 
 Make a screenshoot:
 
-example 1:
+- example 1:
 
 ![image](https://github.com/broholens/images/blob/master/image_to_text_1.jpg)
 
-example 2:
+- example 2:
 
 ![image](https://github.com/broholens/images/blob/master/image_to_text_2.jpg)
 
-example 3:
+- example 3:
 
 ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
 
