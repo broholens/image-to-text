@@ -68,7 +68,10 @@ class Convertor:
 
     def extract_mail(self, words):
         # split string by @
-        word, suffix = words.split('@')
+        try:
+            word, suffix = words.split('@')
+        except:
+            return
         # 选择最匹配的邮箱
         # TODO: qq错误匹配为gmail
         words = word.strip() + '@' + process.extractOne(suffix, self.choices)[0]
@@ -82,23 +85,22 @@ class Convertor:
         if '转' in words:
             a, b = words.split('转')
             words = '-'.join([a, b])
+            # 复制到粘贴板
+            pyperclip.copy(words)
+            return words
         # 手机号
-        elif words.isdigit() is True:
-            words = self.phone_ptn.findall(words)
-            if not words:
-                return 
-            words = words[0]
-        # 未知 错误处理
-        else:
-            return
-        # 复制到粘贴板
+        words = self.phone_ptn.findall(words)
+        if not words:
+            return 
+        words = words[0]
         pyperclip.copy(words)
         return words
+        
 
 
-if __name__ == '__main__':
-    c = Convertor()
-    while 1:
-        result = c.extract()
-        if result:
-            print(datetime.now(), '----', result)
+# if __name__ == '__main__':
+#     c = Convertor()
+#     while 1:
+#         result = c.extract()
+#         if result:
+#             print(datetime.now(), '----', result)
