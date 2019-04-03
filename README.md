@@ -13,11 +13,22 @@ Email addresses supported are as follows:
 
 # Usage(support for windows only)
 
-[Download](https://github.com/broholens/image-to-text/blob/master/extractor.zip) zip file and unzip it, then run gui.exe.
+[Download](https://github.com/broholens/image-to-text/blob/master/extractor.zip) zip file and unzip it
+
+Run gui.exe.
 
 Make a screenshoot:
+
+example 1:
+
 ![image](https://github.com/broholens/images/blob/master/image_to_text_1.jpg)
+
+example 2:
+
 ![image](https://github.com/broholens/images/blob/master/image_to_text_2.jpg)
+
+example 3:
+
 ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
 
 ## Note:
