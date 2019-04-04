@@ -1,4 +1,4 @@
-from tkinter import Label, Tk, GROOVE, SUNKEN, RAISED, Canvas
+from tkinter import Label, Tk, Canvas
 
 from PIL import Image, ImageTk
 
