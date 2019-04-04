@@ -18,7 +18,7 @@ Email addresses supported are as follows:
 #### Run gui.exe
 ![image](https://github.com/broholens/images/blob/master/image_to_text_4.jpg)
 
-#### Make a screenshoot:
+#### Take a screenshoot:
 
 - example 1:
 
@@ -38,6 +38,8 @@ Email addresses supported are as follows:
 #### Parsed result is on your clipboard now, just paste it anywhere you want!
 
 ## Note:
-**Try to make the screenshoot a little bigger, if you want to catch a more accurate result.**
+- **Try to make the screenshoot a little bigger, if you want to catch a more accurate result.**
+- **If your clipboard has nothing and picture in app is difference from current screenshoot, 
+you'd better take a screenshoot again.**
 
 *enjoy :)*
