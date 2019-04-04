@@ -33,7 +33,7 @@ Email addresses supported are as follows:
 ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
 
 #### Take a look at app:
-![image][https://github.com/broholens/images/blob/master/image_to_text_5.jpg]
+![image](https://github.com/broholens/images/blob/master/image_to_text_5.jpg)
 
 #### Parsed result is on your clipboard now, just paste it anywhere you want!
 
