@@ -13,11 +13,12 @@ Email addresses supported are as follows:
 
 # Usage(support for windows only)
 
-[Download](https://github.com/broholens/image-to-text/blob/master/extractor.zip) zip file and unzip it
+#### [Download](https://github.com/broholens/image-to-text/blob/master/extractor.zip) zip file and unzip it
 
-Run gui.exe.
+#### Run gui.exe.
+![image](https://github.com/broholens/images/blob/master/image_to_text_4.jpg)
 
-Make a screenshoot:
+#### Make a screenshoot:
 
 - example 1:
 
@@ -30,6 +31,11 @@ Make a screenshoot:
 - example 3:
 
 ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
+
+#### Take a look at app:
+![image][https://github.com/broholens/images/blob/master/image_to_text_5.jpg]
+
+#### Parsed result is on your clipboard now, just paste it anywhere you want!
 
 ## Note:
 **Try to make the screenshoot a little bigger, if you want to catch a more accurate result.**
