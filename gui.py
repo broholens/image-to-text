@@ -1,5 +1,7 @@
-from tkinter import Label, Tk, Frame
+from tkinter import Label, Tk, GROOVE, SUNKEN, RAISED, Canvas
+
 from PIL import Image, ImageTk
+
 from convertor import Convertor
 
 width, height = 350, 280
@@ -7,6 +9,7 @@ width, height = 350, 280
 root = Tk()
 root.geometry('{}x{}'.format(width, height))
 root.resizable(False, False)
+root.config(bg='#FFC1C1')
 
 global img
 
@@ -20,25 +23,17 @@ def recognize():
     if result:    
         img = load_image()
         img_label.config(image=img)
-        txt_label.config(text=result, bg='red')
+        txt_label.config(text=result, fg='black', font=("Arial", 14))
     # timer
     root.after(300, recognize)
 
-# bg_frame = Frame(root)
-# image = load_image('bg.jpg')
-# canvas = Canvas(bg_frame, width=width, height=height)
-# canvas.pack(expand=YES)
-# canvas.create_image(0, 0, image=image)
-
-# bg_frame.pack()
-
-# weight_frame = Frame(bg_frame)
-img_label = Label(root)
+img_label = Label(root, borderwidth=0)
 img_label.pack(expand=1)
-txt_label = Label(root)
+canvas = Canvas(root, width=width, height=0, borderwidth=0)
+canvas.create_line(0, height/2, width, height/2)
+canvas.pack()
+txt_label = Label(root, borderwidth=0)
 txt_label.pack(expand=2)
-# Label(weight_frame).pack()
-# weight_frame.pack()
 
 root.title('Picture Information Extractor')
 root.iconbitmap('pig.ico')
