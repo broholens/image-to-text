@@ -1,4 +1,7 @@
 # image-to-text
+
+* [中文版](./README_CN.md)
+
 convert image to text by baidu API.  Includes mobile phone number and email address currently.
 
 Email addresses supported are as follows:
