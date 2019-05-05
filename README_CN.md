@@ -9,7 +9,12 @@
 - sina.com
 - hotmail.com
 - outlook.com
-
+- sina.cn
+- live.com
+- sohu.com
+- foxmail.com
+- icloud.com
+- 139.com
 
 # 使用方法(windows)
 
