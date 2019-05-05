@@ -10,13 +10,18 @@ from PIL.BmpImagePlugin import DibImageFile
 
 class Convertor:
 
+    # 这边是我的账号，可以替换为自己的
     APP_ID = '11565085'
     API_KEY = 'dh9pPBqw1H4hQQyPrk4HHVv6'
     SECRET_KEY = '6mjlcxPsT2NRs7wETIqs3xYBjz0pdyH5'
     # email suffix
-    choices = ['qq.com', '126.com', '163.com', 'gmail.com', 'outlook.com', 'hotmail.com', 'sina.com']
+    choices = [
+        'qq.com', '126.com', '163.com', 'gmail.com', 'outlook.com', 
+        'hotmail.com', 'sina.com', 'sina.cn', 'sohu.com', 'live.com',
+        '139.com', 'icloud.com', 'foxmail.com',
+    ]
     # phone pattern
-    phone_ptn = re.compile('\d{11}')
+    phone_ptn = re.compile('(\d{11})')
 
     def __init__(self):
         self.client = AipOcr(self.APP_ID, self.API_KEY, self.SECRET_KEY)
@@ -55,8 +60,8 @@ class Convertor:
         # recongize image
         result = self.client.basicGeneral(image)
         words = result['words_result'][0]['words']
-        # @ 可能解析为 (
-        words = words.replace('(', '@')
+        # @ 可能解析为 (, :可能解析为;
+        words = words.replace('(', '@').replace(';', ':')
         # 联系电话: **********
         if ':' in words:
             words = words.split(':')[-1]
@@ -73,14 +78,19 @@ class Convertor:
         except:
             return
         # 选择最匹配的邮箱
-        # TODO: qq错误匹配为gmail
-        words = word.strip() + '@' + process.extractOne(suffix, self.choices)[0]
+        processed_suffix = process.extractOne(suffix, self.choices)[0]
+        # qq错误匹配为gmail
+        is_qq = len(suffix.split('.')[0]) == 2
+        is_gmail = len(processed_suffix.split('.')[0]) == 5
+        if is_qq is True and is_gmail is True:
+            processed_suffix = 'qq.com'
+        words = word.strip() + '@' + processed_suffix
         # set clipboard
         pyperclip.copy(words)
         return words
 
     def extract_phone(self, words):
-        words = words.split('已验证')[0]
+        words = words.split('验')[0].strip('已').strip()
         # 转接
         if '转' in words:
             a, b = words.split('转')
@@ -95,12 +105,3 @@ class Convertor:
         words = words[0]
         pyperclip.copy(words)
         return words
-        
-
-
-# if __name__ == '__main__':
-#     c = Convertor()
-#     while 1:
-#         result = c.extract()
-#         if result:
-#             print(datetime.now(), '----', result)
