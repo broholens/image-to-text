@@ -16,37 +16,43 @@
 - icloud.com
 - 139.com
 
-# 使用方法(windows)
+## 
 
-#### [下载](https://github.com/broholens/image-to-text/raw/master/extractor.zip) 压缩包并解压。
+## 使用方法(windows)
 
-#### 运行gui.exe
-![image](https://github.com/broholens/images/blob/master/image_to_text_4.jpg)
+1. **[下载压缩包](https://github.com/broholens/image-to-text/raw/master/extractor.zip) 并解压。**
 
-#### 截取需要被识别的区域图片:
+2. **运行img2text.exe(建议添加快捷方式到桌面)**
 
-- example 1:
+3. **截取需要被识别的区域图片:**
 
-![image](https://github.com/broholens/images/blob/master/image_to_text_1.jpg)
+   - example 1:
 
-- example 2:
+     ![image](https://github.com/broholens/images/blob/master/image_to_text_1.jpg)
 
-![image](https://github.com/broholens/images/blob/master/image_to_text_2.jpg)
+   - example 2:
 
-- example 3:
+     ![image](https://github.com/broholens/images/blob/master/image_to_text_2.jpg)
 
-![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
+   - example 3:
 
-#### 查看应用(非必须步骤，只是用来人工确认识别结果):
-![image](https://github.com/broholens/images/blob/master/image_to_text_5.jpg)
+     ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
 
-#### 转换的结果已经自动复制在粘贴板上了，可以直接粘贴
+4. **查看应用(非必须步骤，只是用来人工确认识别结果)**
+
+   ![image](https://github.com/broholens/images/blob/master/image_to_text_5.jpg)
+
+5. **转换的结果已经自动复制在粘贴板上了，可以直接粘贴**
+
+## 
 
 ## 注意:
 - **如果粘贴板上没有可粘贴的内容，请尝试改变截图大小**
-- **如果发生意想不到的错误，请重新运行gui.exe**
+- **如果发生意想不到的错误，请重新运行img2text.exe**
 
 *enjoy :)*
+
+## 
 
 ## TODO
 
@@ -56,7 +62,6 @@
 - ~~sohu.com~~
 - ~~icloud.com~~
 - ~~foxmail.com~~
-- 邮箱小写
 - 邮箱中的字符识别
 - ~~邮箱和手机号分割包含其他字符,如“;”~~
 - 邮箱识别不准确,需要训练模型
