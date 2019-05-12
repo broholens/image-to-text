@@ -8,7 +8,7 @@ from PIL import ImageGrab  # grab image from clipboard
 from PIL.BmpImagePlugin import DibImageFile
 
 
-class Convertor:
+class Img2Text:
 
     # 这边是我的账号，可以替换为自己的
     APP_ID = '11565085'

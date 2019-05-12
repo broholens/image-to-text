@@ -2,7 +2,7 @@ from tkinter import Label, Tk, Canvas
 
 from PIL import Image, ImageTk
 
-from convertor import Convertor
+from convertor import Img2Text
 
 width, height = 350, 280
 
@@ -35,9 +35,9 @@ canvas.pack()
 txt_label = Label(root, borderwidth=0)
 txt_label.pack(expand=2)
 
-root.title('Picture Information Extractor')
+root.title('image2text')
 root.iconbitmap('pig.ico')
-c = Convertor()
+c = Img2Text()
 
 root.after(0, recognize)
 root.mainloop()
