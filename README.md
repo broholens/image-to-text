@@ -65,3 +65,18 @@
 - 邮箱中的字符识别
 - ~~邮箱和手机号分割包含其他字符,如“;”~~
 - 邮箱识别不准确,需要训练模型
+
+
+
+## 开发小记
+
+1. pyinstaller打包出现问题，切换python版本为3.5后ok
+
+2. 开始想把剪切板上的DibImageFile直接返回，后来发现不行，只能存为临时文件tmp.png
+
+3. API识别结果后，使用fuzzywuzzy来进行后缀更正，qq.com被错误识别为gmail.com，最后通过判断@的后缀字符数来进行校正
+
+4. pyperclip 只能复制text到粘贴板
+
+5. GUI开发时，轮询剪切板上有没有内容`root.after(300, recognize)`，在开始mainloop前，需要加上`root.after(0, recognize)`
+6. 设置window大小300x200，中间是小x
