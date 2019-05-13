@@ -20,7 +20,7 @@
 
 ## 使用方法(windows)
 
-1. **[下载压缩包](https://github.com/broholens/image-to-text/raw/master/extractor.zip) 并解压。**
+1. **[下载压缩包](https://pan.baidu.com/s/1bQ8rKa4OFRNTytTAlAzkZw) 并解压。(提取码：6a57)**
 
 2. **运行img2text.exe(建议添加快捷方式到桌面)**
 
@@ -38,7 +38,7 @@
 
      ![image](https://github.com/broholens/images/blob/master/image_to_text_3.jpg)
 
-4. **查看应用(非必须步骤，只是用来人工确认识别结果)**
+4. **查看应用(可选步骤，只是用来人工确认识别结果)**
 
    ![image](https://github.com/broholens/images/blob/master/image_to_text_5.jpg)
 
